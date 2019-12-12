@@ -6,7 +6,10 @@
                     <div class="card-header">Example Component</div>
 
                     <div class="card-body">
-                        I'm an example component.
+                        <h1>{{message}}</h1>
+                        <button class="btn btn-light">{{count}}</button>
+                        <button class="btn btn-success" @click="count++">+</button>
+                        <button class="btn btn-danger" @click="count--">-</button>
                     </div>
                 </div>
             </div>
@@ -16,6 +19,12 @@
 
 <script>
     export default {
+        data() {
+            return {
+                count: 0,
+                message: 'Hola!'
+            }
+        },
         mounted() {
             console.log('Component mounted.')
         }

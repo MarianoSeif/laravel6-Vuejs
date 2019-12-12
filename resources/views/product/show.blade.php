@@ -13,7 +13,9 @@
                         {{$product->description}}
                     </div>
                 </div>
-                <a href="{{route('product_edit', ['product'=>$product->id])}}" class="btn btn-primary">Edit</a>
+                @auth()
+                    <a href="{{route('product.edit', ['product'=>$product->id])}}" class="btn btn-primary">Edit</a>
+                @endauth
             </div>
         </div>
     </div>

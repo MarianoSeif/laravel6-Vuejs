@@ -20,7 +20,10 @@
                     <a class="nav-link" href="{{route('about')}}">Pricing</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('product', ['orderBy'=>0])}}">Products</a>
+                    <a class="nav-link" href="{{route('product.index', ['orderBy'=>'all'])}}">Products</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('vueapp')}}">VueApp</a>
                 </li>
             </ul>
 

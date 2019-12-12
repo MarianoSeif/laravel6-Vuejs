@@ -4,7 +4,7 @@
 
     <div class="mt-3">
         <h1>Create Product</h1>
-        {!! Form::open(['action'=>'ProductController@create', 'method'=>'POST']) !!}
+        {!! Form::open(['action'=>'ProductsController@store', 'method'=>'POST']) !!}
             <div class="form-group">
                 {{Form::label ('name', 'Name:')}}
                 {{Form::text('name', '', ['class'=>'form-control', 'placeholder'=>'Ingrese un nombre'])}}

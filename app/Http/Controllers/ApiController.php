@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Product;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
-class RestfulController extends Controller
+class ApiController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +15,7 @@ class RestfulController extends Controller
      */
     public function index()
     {
-        //
+        return response(Product::all());
     }
 
     /**
@@ -23,7 +25,7 @@ class RestfulController extends Controller
      */
     public function create()
     {
-        //
+        return response('Hellou');
     }
 
     /**
@@ -34,7 +36,17 @@ class RestfulController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name'=>'required',
+            'description'=>'required'
+        ]);
+
+        $product = new Product();
+        $product->name = $request->input('name');
+        $product->description = $request->input('description');
+        $product->save();
+
+        return redirect()->route('vueapp');
     }
 
     /**
@@ -45,7 +57,7 @@ class RestfulController extends Controller
      */
     public function show($id)
     {
-        //
+        return response('Hellou'.$id);
     }
 
     /**
@@ -68,16 +80,17 @@ class RestfulController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return response('Hellou'.$id);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $product
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
-    public function destroy($id)
+    public function destroy(Product $product)
     {
         //
     }

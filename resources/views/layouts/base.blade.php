@@ -48,7 +48,7 @@
     @include('include.navbar')
 
     <div class="container">
-        @if($errors->any())
+        @if ($errors->any())
             <div class="mt-2 alert alert-danger">
                 <ul>
                     @foreach($errors->all() as $error)

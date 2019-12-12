@@ -6,29 +6,47 @@
             <h1>Product List</h1>
         </div>
         <div class="col">
-            <a href="{{route('product_create')}}" class="btn btn-primary float-right">Create</a>
+            <a href="{{route('product.create')}}" class="btn btn-primary float-right">Create</a>
         </div>
     </div>
     <table class="table table-striped">
         <thead class="thead-dark">
             <tr>
-                <th>Name<a href="{{route('product', ['orderBy'=>2])}}">&rtriltri;</a></th>
-                <th>Description</th>
-                <th>Created at<a href="{{route('product', ['orderBy'=>1])}}">&rtriltri;</a></th>
-                <th></th>
-                <th></th>
+                <th style="width: 30%">Name
+                    <a href="{{route('product.index', ['orderBy'=>'name_asc'])}}">&#9652;</a>
+                    <a href="{{route('product.index', ['orderBy'=>'name_desc'])}}">&#9662;</a>
+                </th>
+                <th style="width: 30%">Description</th>
+                <th style="width: 30%">Created at
+                    <a href="{{route('product.index', ['orderBy'=>'created_at_asc'])}}">&#9652;</a>
+                    <a href="{{route('product.index', ['orderBy'=>'created_at_desc'])}}">&#9662;</a>
+                </th>
+                @auth()
+                    <th style="width: 5%"></th>
+                    <th style="width: 5%"></th>
+                @endauth
             </tr>
         </thead>
         <tbody>
             @foreach($products as $product)
                 <tr>
-                    <td><a href="{{route('product_show', ['product' => $product->id ])}}">{{$product->name}}</a></td>
+                    <td><a href="{{route('product.show', ['product' => $product->id ])}}">{{$product->name}}</a></td>
                     <td>{{$product->description}}</td>
                     <td>{{$product->created_at}}</td>
-                    <td><a href="{{route('product_edit', ['product' => $product->id])}}"><i class="fa fa-pencil"></i><small>Edit</small></a></td>
-                    <td><a href="{{route('product_remove', ['product'=>$product->id])}}" onclick="return confirm('are u sure?')"><i class="fa fa-trash"></i><small>Delete</small></a></td>
+                    @auth()
+                        <td>
+                            <a href="{{route('product.edit', ['product'=>$product->id])}}" class="btn btn-primary btn-sm">Edit</a>
+                        </td>
+                        <td>
+                            {{ Form::open(['action' => ['ProductsController@destroy', 'product'=>$product->id], 'method' => 'delete', 'class' => 'deleteForm']) }}
+                                {{Form::submit('Eliminar', ['class'=>'btn btn-danger btn-sm', 'onclick'=>'return confirm("are u sure?")'])}}
+                            {{ Form::close() }}
+                        </td>
+                    @endauth
                 </tr>
             @endforeach
+
+            {{ $products->appends(['orderBy'=>Session::get('orderBy')])->links() }}
         </tbody>
     </table>
 

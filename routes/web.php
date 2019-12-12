@@ -17,18 +17,15 @@ Route::get('/links', 'MainController@links')->name('links');
 
 Route::get('/about', 'MainController@about')->name('about');
 
-Route::match(['get', 'post'], '/product/create', 'ProductController@create')->name('product_create')->middleware('auth');
+Route::get('/vueapp', 'MainController@vueapp')->name('vueapp');
 
-Route::get('/product/{product}/show', 'ProductController@show')->name('product_show');
+//Route::get('/api/products', 'MainController@returnProducts')->name('returnProducts');
 
-Route::get('/product/{product}/remove', 'ProductController@remove')->name('product_remove')->middleware('auth');
 
-Route::match(['get', 'post'], '/product/{product}/edit', 'ProductController@edit')->name('product_edit')->middleware('auth');
+Route::resource('product', 'ProductsController');
 
-Route::get('/product/{orderBy}', 'MainController@productsIndex')->name('product');
+Auth::routes();
 
 Route::get('/welcome', function () {
     return view('welcome');
 });
-
-Auth::routes();

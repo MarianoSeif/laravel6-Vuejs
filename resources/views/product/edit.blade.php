@@ -4,7 +4,7 @@
     <div class="mt-3">
         <h1>Edit Product</h1>
 
-        {!! Form::open(['action'=>['ProductController@edit', $product->id], 'method'=>'POST']) !!}
+        {!! Form::open(['action'=>['ProductsController@update', $product->id], 'method'=>'PUT']) !!}
             <div class="form-group">
                 {{Form::label ('name', 'Name:')}}
                 {{Form::text('name', $product->name, ['class'=>'form-control'])}}

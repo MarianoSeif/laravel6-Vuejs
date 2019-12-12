@@ -56,4 +56,14 @@ class MainController extends Controller
 
         return view('product.products')->with('products', $products);
     }
+
+    public function vueapp()
+    {
+        return view('pages.vueapp');
+    }
+
+    /*public function returnProducts()
+    {
+        return Product::all();
+    }*/
 }
